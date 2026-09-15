@@ -4,6 +4,8 @@ class Solution {
 
     public int backtrack(int[][] arr, int st, int m, int n) {
 
+        if( m == 0 && n == 0 ) return 0 ;
+
         if (m < 0 || n < 0)
             return Integer.MIN_VALUE;
 
