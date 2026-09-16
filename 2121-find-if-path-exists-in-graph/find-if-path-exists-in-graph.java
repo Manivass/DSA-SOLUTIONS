@@ -8,18 +8,18 @@ class Solution {
             graph[a].add(b) ;
             graph[b].add(a) ;
         }
-        Queue<Integer> q = new LinkedList<>() ;
-        q.offer( source ) ;
+        Deque<Integer> stack = new LinkedList<>() ;
+        stack.push( source ) ;
         HashSet<Integer> visited = new HashSet<>() ;
         visited.add(source) ;
 
-        while( !q.isEmpty() ) {
-            int curr = q.poll() ;
+        while( !stack.isEmpty() ) {
+            int curr = stack.poll() ;
             if( curr == destination ) return true ;
             for( int num : graph[curr] ) {
-                if( !visited.contains( num ) ) {
-                    q.offer(num) ;
-                    visited.add( num ) ;
+                if( !visited.contains(num) ) {
+                    stack.push( num ) ;
+                    visited.add(num) ;
                 }
             }
         }
