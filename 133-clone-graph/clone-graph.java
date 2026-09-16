@@ -20,23 +20,24 @@ class Node {
 
 class Solution {
     public Node cloneGraph(Node root) {
-        if( root == null ) return null ;
-        Queue<Node> queue = new ArrayDeque<>();
-        queue.offer(root);
+        if (root == null)
+            return null;
+        Queue<Node> q = new ArrayDeque<>();
         HashMap<Node, Node> visited = new HashMap<>();
+        q.offer(root) ;
         Node cloneGraph = new Node(root.val);
         visited.put(root, cloneGraph);
-        while (!queue.isEmpty()) {
-            Node curr = queue.poll();
+        while (!q.isEmpty()) {
+            Node curr = q.poll();
             Node currClone = visited.get(curr);
             for (Node n : curr.neighbors) {
                 if (!visited.containsKey(n)) {
                     visited.put(n, new Node(n.val));
-                    queue.offer(n);
+                    q.offer(n);
                 }
-                currClone.neighbors.add( visited.get(n) ) ;
+                currClone.neighbors.add(visited.get(n));
             }
         }
-        return cloneGraph ;
+        return cloneGraph;
     }
 }
