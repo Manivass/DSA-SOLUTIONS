@@ -1,28 +1,25 @@
 class Solution {
+    HashSet<Integer> visited = new HashSet<>() ;
+    public boolean isSourceExist( int curr , int t , List<Integer>[] graph ) {
+        if ( curr == t ) return true ;
+        boolean ans = false ;
+        for( int num : graph[curr] ) {
+            if( !visited.contains( num ) ) {
+                visited.add( num ) ;
+                ans = ans || isSourceExist( num , t , graph ) ;
+            }
+        }
+        return ans ;
+    }
     public boolean validPath(int n, int[][] edges, int source, int destination) {
         List<Integer>[] graph = new ArrayList[n] ;
         for( int i = 0 ; i < n ; i++ ) graph[i] = new ArrayList<>() ;
         for( int[] edge : edges ) {
-            int a = edge[0] ;
-            int b = edge[1] ;
-            graph[a].add(b) ;
-            graph[b].add(a) ;
+            int x1 = edge[0] ;
+            int x2 = edge[1] ;
+            graph[x1].add(x2) ;
+            graph[x2].add(x1) ;
         }
-        Deque<Integer> stack = new LinkedList<>() ;
-        stack.push( source ) ;
-        HashSet<Integer> visited = new HashSet<>() ;
-        visited.add(source) ;
-
-        while( !stack.isEmpty() ) {
-            int curr = stack.poll() ;
-            if( curr == destination ) return true ;
-            for( int num : graph[curr] ) {
-                if( !visited.contains(num) ) {
-                    stack.push( num ) ;
-                    visited.add(num) ;
-                }
-            }
-        }
-        return false  ; 
+        return isSourceExist( source , destination , graph ) ;
     }
 }
