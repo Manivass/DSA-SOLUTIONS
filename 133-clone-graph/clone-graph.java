@@ -21,20 +21,23 @@ class Node {
 class Solution {
     public Node cloneGraph(Node root) {
         if( root == null ) return root ;
-        Deque<Node> stack = new ArrayDeque<>() ;
-        stack.push(root) ;
-        Node cloneGraph = new Node( root.val ) ;
+        Queue<Node> queue = new ArrayDeque<>() ;
+        queue.offer(root) ;
+
         HashMap<Node , Node> visited = new HashMap<>() ;
+
+        Node cloneGraph = new Node( root.val ) ;
         visited.put( root , cloneGraph ) ;
-        while( !stack.isEmpty() ) {
-            Node curr = stack.pop() ;
+
+        while( !queue.isEmpty() ) {
+            Node curr = queue.poll() ;
             Node currClone = visited.get(curr) ;
-            for( Node n : curr.neighbors ) {
-                if( !visited.containsKey(n) ) {
-                    visited.put( n , new Node( n.val ) ) ;
-                    stack.push(n) ;
+            for( Node neigh : curr.neighbors ) {
+                if( !visited.containsKey(neigh) ) {
+                    visited.put( neigh , new Node( neigh.val ) ) ;
+                    queue.offer( neigh ) ;
                 }
-                currClone.neighbors.add( visited.get(n) ) ;
+                currClone.neighbors.add( visited.get(neigh) ) ;
             }
         }
         return cloneGraph ;
