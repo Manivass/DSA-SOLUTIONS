@@ -1,29 +1,32 @@
 class Solution {
-    List<String> path = new ArrayList<>();
 
-    public void dfs(String str, HashMap<String, List<String>> map) {
-        if (!map.containsKey(str)) {
-            path.add(str);
-            return;
-
+    public void dfs( String city , HashMap<String , List<String>> map , List<String> path ) {
+        if( !map.containsKey(city) ) {
+            path.add(city) ;
+            return ;
         }
-            while (!map.get(str).isEmpty()) {
-                String getCity = map.get(str).remove(0);
-                dfs(getCity, map);
-            }
-            path.add(str);
+
+        while( !map.get(city).isEmpty() ) {
+            String getCity = map.get(city).remove(0) ;
+            dfs(getCity , map , path) ;
+        }
+        path.add(city) ;
     }
 
     public List<String> findItinerary(List<List<String>> tickets) {
-        HashMap<String, List<String>> map = new HashMap<>();
-        for (List<String> subList : tickets) {
-            if (!map.containsKey(subList.get(0)))
-                map.put(subList.get(0), new ArrayList<>());
-            map.get(subList.get(0)).add(subList.get(1));
+        HashMap<String , List<String>> map = new HashMap<>() ;
+        for( List<String> city : tickets ) {
+            String dept = city.get(0) ;
+            String arrival = city.get(1) ;
+            if( !map.containsKey( dept ) ) map.put( dept , new ArrayList<>() ) ;
+            map.get(dept).add( arrival ) ;
         }
-        for( List<String> list : map.values() ) list.sort(null) ;
-        dfs("JFK", map);
-        Collections.reverse(path);
-        return path;
+
+
+        for( List<String> val : map.values() ) val.sort(null) ;
+        List<String> path = new ArrayList<>() ;
+        dfs( "JFK" , map , path ) ;
+        Collections.reverse(path) ;
+        return path ;
     }
 }
