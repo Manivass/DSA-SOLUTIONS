@@ -15,9 +15,7 @@ class Solution {
             int row = dr[k] + i;
             int col = dc[k] + j;
             int res = backtrack(grid, row, col);
-            if (res != Integer.MAX_VALUE - 1) {
-                min = Math.min(min, res);
-            }
+            min = Math.min(min, res);
         }
         int ans = 1 + min ;
         dp[i][j] = ans == Integer.MAX_VALUE ? ans - 1 : ans ;
