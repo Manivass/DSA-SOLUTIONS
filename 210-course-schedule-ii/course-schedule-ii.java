@@ -1,38 +1,31 @@
 class Solution {
-    int[] visited ;
-    List<Integer> ans ;
-    public boolean dfs( int num , List<Integer>[] adjList ) {
+    List<Integer> ans = new ArrayList<>() ;
+    public boolean dfs( int num , List<List<Integer>> graph , int[] visited ) {
         if( visited[num] == 1 ) return false ;
         if( visited[num] == 2 ) return true ;
         visited[num] = 1 ;
-        for( int neighbor : adjList[num] ) {
-            if( !dfs( neighbor , adjList ) ) return false ;
+        for( int neigh : graph.get(num) ) {
+            if( !dfs( neigh , graph , visited ) ) return false ;
         }
-
         visited[num] = 2 ;
-        ans.add( num ) ;
-
+        ans.add(num) ;
         return true ;
     }
-    public int[] findOrder(int n, int[][] prerequisites) {
-        List<Integer>[] adjList = new List[n] ;
-
-        for( int i = 0 ; i < n ; i++ ) adjList[i] = new ArrayList<>();
-
-        for( int[] num :prerequisites ) {
-            adjList[num[0]].add(num[1]) ;
+    public int[] findOrder(int n, int[][] pre) {
+        List<List<Integer>> graph = new ArrayList<>() ;
+        for( int i = 0 ; i < n ; i++ ) graph.add( new ArrayList<>() ) ;
+        for( int[] num : pre ) {
+            graph.get(num[0]).add(num[1]) ;
         }
-        visited = new int[n] ;
-        ans = new ArrayList<>() ;
+        int[] visited = new int[n] ;
+        Arrays.fill(visited , -1) ;
         for( int i = 0 ; i < n ; i++ ) {
-            if( visited[i] == 0 ) {
-               if( !dfs( i , adjList  ) ) return new int[] {} ;
+            if( visited[i] == -1 ) {
+                if(! dfs( i , graph , visited ) ) return new int[] {} ; 
             }
         }
-
         int[] arr = new int[ans.size()] ;
-        for( int i = 0 ; i < arr.length ; i++ ) arr[i] = ans.get(i) ;
+        for( int i = 0 ; i < ans.size() ; i++ ) arr[i] = ans.get(i) ;
         return arr ;
-
     }
 }
