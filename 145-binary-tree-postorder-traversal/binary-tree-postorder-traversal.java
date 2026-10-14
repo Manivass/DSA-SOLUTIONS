@@ -14,22 +14,15 @@
  * }
  */
 class Solution {
+    List<Integer> ans = new ArrayList<>() ;
+    public void postOrder( TreeNode curr ) {
+        if( curr == null ) return ;
+        if( curr.left != null ) postOrder( curr.left ) ;
+        if( curr.right != null ) postOrder( curr.right ) ;
+        ans.add(curr.val) ;
+    }
     public List<Integer> postorderTraversal(TreeNode root) {
-        Deque<Integer> s1 = new ArrayDeque<>() ;
-        Deque<TreeNode> s2 = new ArrayDeque<>() ;
-        List<Integer> list = new ArrayList<>() ;
-        if( root == null ) return list ;
-        s2.push( root ) ;
-        while( !s2.isEmpty() ) {
-            TreeNode curr = s2.pop() ;
-            s1.push(curr.val) ;
-            if( curr.left != null ) s2.push( curr.left ) ;
-            if( curr.right != null ) s2.push( curr.right ) ;
-        }
-        int k = s1.size() ;
-        for( int i = 0 ; i < k ; i++ ) {
-            list.add(s1.pop()) ;
-        }
-        return list ;
+        postOrder( root ) ;
+        return ans ;
     }
 }
