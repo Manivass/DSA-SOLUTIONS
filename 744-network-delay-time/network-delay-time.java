@@ -3,48 +3,39 @@ class Solution {
         List<List<List<Integer>>> graph = new ArrayList<>();
         for (int i = 0; i < n; i++)
             graph.add(new ArrayList<>());
-        for (int[] num : times) {
-            List<Integer> list = new ArrayList<>();
-            list.add(num[1]);
-            list.add(num[2]);
-            graph.get(num[0] - 1).add(list);
+        for (int[] time : times) {
+            int u = time[0];
+            int v = time[1];
+            int dist = time[2];
+            List<Integer> list = Arrays.asList(v, dist);
+            graph.get(u - 1).add(list);
         }
         int[] dist = new int[n];
-        Arrays.fill(dist, Integer.MAX_VALUE);
+        Arrays.fill(dist , Integer.MAX_VALUE) ;
         dist[k - 1] = 0;
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(a[1], b[1]));
-        pq.offer(new int[] { k - 1, 0 });
+        pq.offer( new int[] { k  , 0  } ) ;
         while (!pq.isEmpty()) {
             int[] curr = pq.poll();
-            int val = curr[0];
-            int weight = curr[1];
-            if (dist[val] < weight)
-                continue;
-            for (List<Integer> neigh : graph.get(val)) {
-                int next = neigh.get(0) - 1;
-                int edgeWeight = neigh.get(1);
-
-                int newDist = weight + edgeWeight;
-
-                if (newDist < dist[next]) {
-
-                    dist[next] = newDist;
-
-                    pq.offer(
-                            new int[] { next, newDist });
+            int edge = curr[0] - 1 ;
+            int eDist = curr[1] ;
+            for( List<Integer> neigh : graph.get(edge) ) {
+                int neighEdge = neigh.get(0) ;
+                int neighDist = neigh.get(1) ;
+                int newDist = eDist + neighDist ;
+                if( newDist < dist[neighEdge - 1] ) {
+                    dist[neighEdge - 1] = newDist ;
+                    pq.offer( new int[] { neighEdge , newDist } ) ;
                 }
             }
         }
-        int ans = 0;
-
-        for (int d : dist) {
-
-            if (d == Integer.MAX_VALUE)
-                return -1;
-
-            ans = Math.max(ans, d);
+        int max = 0 ;
+        for( int d : dist ) {
+            if( d == Integer.MAX_VALUE ) return -1 ;
+            max = Math.max(max , d) ;
         }
+        return max ;
 
-        return ans;
+
     }
 }
