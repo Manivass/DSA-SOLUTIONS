@@ -17,6 +17,7 @@ class Solution {
     boolean ans = true ;
     public int balance( TreeNode curr ) {
         if( curr == null ) return 0 ;
+        if( !ans ) return 0 ;
         int left = 1 +  balance( curr.left ) ;
         int right = 1 + balance( curr.right ) ;
         int diff = Math.abs( left - right ) ;
