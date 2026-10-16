@@ -26,7 +26,8 @@ class Solution {
     }
     public int goodNodes(TreeNode root) {
         traverse( root.left , root.val ) ;
-        traverse( root.right , root.val ) ;
+        traverse( root.right
+         , root.val ) ;
         return cnt ;
     }
 }
