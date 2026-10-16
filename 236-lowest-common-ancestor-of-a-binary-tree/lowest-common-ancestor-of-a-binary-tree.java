@@ -19,7 +19,7 @@ class Solution {
         if( count == 2 && ans == null ) {
             ans = curr ;
             return ans.val ;
-        }   
+        }
         return count ;
     }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
