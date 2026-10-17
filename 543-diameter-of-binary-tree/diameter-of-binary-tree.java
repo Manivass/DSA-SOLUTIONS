@@ -17,10 +17,10 @@ class Solution {
     int max = 0 ;
     public int traverse( TreeNode curr ) {
         if( curr == null ) return 0 ;
-        int leftMax = traverse( curr.left ) ;
-        int rightMax = traverse( curr.right ) ;
-        max = Math.max( max , leftMax + rightMax ) ;
-        return 1 + Math.max( leftMax , rightMax ) ;
+        int left = traverse( curr.left ) ;
+        int right = traverse( curr.right ) ;
+        max = Math.max( max , left + right ) ;
+        return 1 + Math.max( left , right ) ;
     }
     public int diameterOfBinaryTree(TreeNode root) {
         traverse( root ) ;
