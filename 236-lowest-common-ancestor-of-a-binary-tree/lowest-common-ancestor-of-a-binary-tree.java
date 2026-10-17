@@ -12,13 +12,12 @@ class Solution {
     public int traverse( TreeNode curr , TreeNode p , TreeNode q ) {
         if( curr == null ) return 0 ;
         int count = 0 ;
-        int leftSub = traverse( curr.left , p , q ) ;
-        int rightSub = traverse( curr.right , p , q ) ;
+        int left = traverse( curr.left , p , q ) ;
+        int right = traverse( curr.right , p , q ) ;
         if( curr.val == p.val || curr.val == q.val ) count++ ;
-        count = count + leftSub + rightSub ;
+        count = count + left + right ;
         if( count == 2 && ans == null ) {
             ans = curr ;
-            return ans.val ;
         }
         return count ;
     }
