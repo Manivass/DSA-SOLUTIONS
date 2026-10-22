@@ -14,7 +14,7 @@ class Solution {
         for (right = 0; right < s.length(); right++) {
             char ch = s.charAt(right);
             window.put(ch, window.getOrDefault(ch, 0) + 1);
-            if (map.containsKey(ch) && map.get(ch).equals(window.get(ch)))
+            if (map.containsKey(ch) && map.get(ch).intValue() == window.get(ch).intValue())
                 formed++;
             while (formed == required) {
                 if (min > right - left + 1) {
