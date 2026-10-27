@@ -14,20 +14,20 @@
  * }
  */
 class Solution {
-    int ans = 0 ;
-    int count = 0 ;
-    public void traverse( TreeNode curr ) {
-        if( curr.left != null ) traverse( curr.left ) ;
-        count-- ;
-        if( count == 0 ) {
-            ans = curr.val ;
-            return ;
-        }
-        if( curr.right != null ) traverse( curr.right ) ;
-    }
     public int kthSmallest(TreeNode root, int k) {
-        count = k ;
-        traverse( root ) ;
-        return ans ;
+        PriorityQueue<Integer> pq = new PriorityQueue<>() ;
+        Queue<TreeNode> queue = new ArrayDeque<>() ;
+        queue.offer(root) ;
+        while( !queue.isEmpty() ) {
+            int size = queue.size() ;
+            for( int i = 0 ; i < size ; i++ ) {
+                TreeNode curr = queue.poll() ;
+                pq.offer(curr.val) ;
+                if( curr.left != null ) queue.offer( curr.left ) ;
+                if( curr.right != null ) queue.offer( curr.right ) ;
+            }
+        } 
+        for( int i = 0 ; i < k - 1 ; i++ ) pq.poll() ;
+        return pq.peek() ;
     }
 }
