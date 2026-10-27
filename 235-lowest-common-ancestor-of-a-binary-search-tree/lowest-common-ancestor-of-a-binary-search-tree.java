@@ -11,6 +11,7 @@
 class Solution {
     TreeNode ans = null ;
     public void traverse( TreeNode curr , int p , int q ) {
+        if( curr == null ) return ;
         if( curr.val > p && curr.val > q ) {
             traverse( curr.left , p , q ) ;
         }
@@ -23,7 +24,7 @@ class Solution {
         }
     }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        traverse( root , p.val , q.val ) ;
+        traverse( root , p.val , q .val) ;
         return ans ;
     }
 }
