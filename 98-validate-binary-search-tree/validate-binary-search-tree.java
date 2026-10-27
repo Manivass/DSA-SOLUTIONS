@@ -14,12 +14,13 @@
  * }
  */
 class Solution {
-    public boolean traverse( TreeNode curr , long low , long high ) {
+    public boolean traverse( TreeNode curr , long minVal , long maxVal ) {
         if( curr == null ) return true ;
-        if( curr.val <= low || curr.val >= high ) return false ;
-        return traverse( curr.left , low , curr.val ) && traverse( curr.right , curr.val , high ) ;
+        if( curr.val <= minVal || curr.val >= maxVal ) return false ;
+        return traverse( curr.left , minVal , curr.val ) && traverse( curr.right , curr.val , maxVal ) ;
     }
+
     public boolean isValidBST(TreeNode root) {
-       return traverse( root , Long.MIN_VALUE , Long.MAX_VALUE  ) ;
+        return traverse(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 }
