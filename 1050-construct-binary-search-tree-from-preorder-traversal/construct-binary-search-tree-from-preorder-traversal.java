@@ -14,19 +14,17 @@
  * }
  */
 class Solution {
-    int index = 0;
-
-    public TreeNode traverse(int[] arr, int max) {
+    int index = 0 ;
+    public TreeNode traverse( int[] arr , int max ) {
         if( arr.length == index ) return null ;
         if( arr[index] > max ) return null ;
-        TreeNode node = new TreeNode(arr[index]);
-        index++;
-        node.left = traverse( arr , node.val ) ;
-        node.right = traverse( arr , max ) ;
-        return node ;
+        TreeNode root = new TreeNode( arr[index] ) ;
+        index++ ;
+        root.left = traverse( arr , root.val ) ;
+        root.right = traverse( arr, max ) ;
+        return root ;
     }
-
     public TreeNode bstFromPreorder(int[] preorder) {
-        return traverse(preorder, Integer.MAX_VALUE);
+        return traverse( preorder , Integer.MAX_VALUE ) ;
     }
 }
