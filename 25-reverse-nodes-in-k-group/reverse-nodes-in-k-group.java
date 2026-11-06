@@ -11,7 +11,7 @@
 class Solution {
 
     ListNode selentialNode = new ListNode();
-        ListNode dup = selentialNode;
+    ListNode dup = selentialNode;
 
     public void swapNode(List<Integer> list) {
         for (int i = list.size() - 1; i >= 0; i--) {
