@@ -1,16 +1,12 @@
 class Solution {
     int min = Integer.MAX_VALUE ;
     public boolean powerOfFive(String s) {
-
         long dec = Long.parseLong(s, 2);
-
         if (dec == 0) return false;
-
-        while (dec % 5 == 0) {
-            dec /= 5;
+        while( dec % 5 == 0 ) {
+            dec = dec / 5 ; 
         }
-
-        return dec == 1;
+        return dec == 1 ; 
     }
 
     public void backtrack(String str, List<String> list) {
