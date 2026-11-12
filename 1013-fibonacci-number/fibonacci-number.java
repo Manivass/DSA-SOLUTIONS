@@ -1,14 +1,11 @@
 class Solution {
-    int[] arr;
-    public int fibo( int n ) {
-        if( n <= 1 ) return n ;
-        arr[n - 1] = fibo( n - 1 ) + fibo( n - 2 ) ;
-        return arr[n -1 ] ;
-    }
     public int fib(int n) {
-        if( n <= 1 ) return n ;
-        arr = new int[n] ;
-        int ans = fibo( n ) ;
-        return arr[n - 1] ;
+        List<Integer> list = new ArrayList<>() ;
+        list.add(0) ;
+        list.add(1) ;
+        for( int i = 2 ; i <= n ; i++ ) {
+            list.add( list.get( list.size() - 1 ) + list.get( list.size() - 2 ) ) ;
+        }
+        return list.get( n ) ;
     }
 }
